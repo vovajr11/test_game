@@ -24,9 +24,12 @@ export class Scene {
   }
 
   init() {
-    //init() для запуску та перезапуску сцени і скинути все по дефолту
+    this.status = this.constructor.WORKING;
+  }
+
+  finish(status) {
     this.status = status;
   }
-  //render(time) для отрисовки сцени
+
   render(time) {}
 }

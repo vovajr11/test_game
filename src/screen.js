@@ -15,13 +15,11 @@ export class Screen {
     loader.load().then((names) => {
       this.images = Object.assign(this.images, loader.images);
       this.isImagesLoaded = true;
-      console.log(names);
     });
   }
 
   createCanvas(width, height) {
     let elements = document.getElementsByTagName("canvas");
-
     let canvas = elements[0] || document.createElement("canvas");
     document.body.appendChild(canvas);
     canvas.width = width;
