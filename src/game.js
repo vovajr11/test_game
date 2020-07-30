@@ -1,27 +1,45 @@
-import { Screen } from "./screen";
-import { Loading } from "./scenes/loading";
+import { Screen } from './screen';
+import { Loading } from './scenes/loading';
+import { Menu } from './scenes/menu';
+import { Scene } from './scene';
 
 export class Game {
-  constructor() {
-    this.screen = new Screen(480, 480);
-
-    this.scenes = {
-      loading: new Loading(this),
-    };
-    this.currentScene = this.scenes.loading;
-    this.currentScene.init();
-  }
-
-  frame(time) {
-    if (this.currentScene.isActive == false) {
-      this.currentScene = this.scenes[this.currentScene.nextScene];
-      this.currentScene.init();
+    constructor({width = 640, height = 640} = {}) {
+        this.screen = new Screen(width,height);
+        this.screen.loadImages({
+			orc: 'img/orc.png',
+			player: 'img/player.png',
+			title: 'img/title.jpg',
+			tiles: 'img/tiles.png'            
+        });
+        this.scenes = {
+            loading: new Loading(this),
+            menu: new Menu(this)
+        };
+        this.currentScene = this.scenes.loading;
+        this.currentScene.init();
     }
-    this.currentScene.render(time);
-    requestAnimationFrame((time) => this.frame(time));
-  }
 
-  run() {
-    requestAnimationFrame((time) => this.frame(time));
-  }
+    changeScene(status) {
+        switch (status) {
+            case Scene.LOADED:
+                return this.scenes.menu;
+            
+            default:
+                return this.scenes.menu;
+        }
+    }
+
+    frame(time) {
+        if(this.currentScene.status != Scene.WORKING) {
+            this.currentScene = this.changeScene(this.currentScene.status);
+            this.currentScene.init();
+        }
+        this.currentScene.render(time);
+        requestAnimationFrame(time => this.frame(time));
+    }
+
+    run() {
+        requestAnimationFrame(time => this.frame(time));
+    }
 }
