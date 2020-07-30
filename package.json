@@ -1,0 +1,29 @@
+{
+  "name": "test_game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dist": "webpack",
+    "watch": "webpack -w",
+    "server": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vovajr11/test_game.git"
+  },
+  "author": "vova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vovajr11/test_game/issues"
+  },
+  "homepage": "https://github.com/vovajr11/test_game#readme",
+  "devDependencies": {
+    "@babel/core": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "webpack": "^4.44.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
