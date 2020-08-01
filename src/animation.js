@@ -34,8 +34,10 @@ export class Animation extends Sprite {
   }
 
   run() {
-    this.setFrame(0);
-    this.running = true;
+    if (!this.running) {
+      this.setFrame(0);
+      this.running = true;
+    }
   }
 
   stop() {
@@ -64,7 +66,7 @@ export class Animation extends Sprite {
     }
     if (time - this.lastTime > this.speed) {
       this.nextFrame();
-      this.lastTime += this.speed;
+      this.lastTime = time;
     }
   }
 }
